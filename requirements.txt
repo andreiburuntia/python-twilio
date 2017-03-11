@@ -1,3 +1,4 @@
 Flask==0.10.1
 tweepy==3.5.0
 twilio>=3.3.6
+gunicorn>=19.7.0
