@@ -4,12 +4,26 @@ from twilio import twiml
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-    """Respond to incoming calls with a simple text message."""
 
+
+@app.route("/sms", methods=['GET', 'POST'])
+def incoming_sms():
+    """Send a dynamic reply to an incoming text message"""
+    # Get the message the user sent our Twilio number
+    body = request.values.get('Body', None)
+
+    # Start our TwiML response
     resp = twiml.Response()
-    resp.message("Hello, Mobile Monkey")
+
+    if body is not None:
+        arguments = body.split("\s")
+
+        if arguments[0] == 'location':
+            resp.message("Hi -0!")
+
+        elif arguments[0] == 'twitter':
+            resp.message("Hi -1!")
+
     return str(resp)
 
 @app.route("/sms", methods=['GET', 'POST'])
@@ -21,11 +35,6 @@ def incoming_sms():
     # Start our TwiML response
     resp = twiml.Response()
 
-    # Determine the right reply for this message
-    if body == 'hello':
-        resp.message("Hi!")
-    elif body == 'bye':
-        resp.message("Goodbye")
 
     return str(resp)
 
