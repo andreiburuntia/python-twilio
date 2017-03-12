@@ -13,8 +13,7 @@ def incoming_sms():
     resp = twiml.Response()
 
      if body is not None:
-        arguments = body.split("\s")
-
+        arguments = body.split(" ")
         if arguments[0] == 'Location':
             s=body
             start_loc=s[s.find("(")+1:s.find(")")]
@@ -22,7 +21,7 @@ def incoming_sms():
             end_loc=a[a.find("(")+1:a.find(")")]
             resp.message(start_loc+" - "+end_loc)
 
-        elif arguments[0] == 'twitter':
+        elif arguments[0] == 'Twitter':
             resp.message("Hi -1!")
 
     return str(resp)
