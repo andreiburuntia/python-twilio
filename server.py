@@ -2,6 +2,7 @@ from flask import Flask, request, redirect
 import twilio.twiml
 import datetime
 import gmaps
+import weather
 from twilio import twiml
 
 app = Flask(__name__)
@@ -28,6 +29,7 @@ def incoming_sms():
     if body is not None:
         arguments = body.split(" ")
         if arguments[0] == 'Location':
+            resp.message("Location!")
             # s=body
             # start_loc=s[s.find("(")+1:s.find(")")]
             # a=s.split(",")[1]
@@ -35,8 +37,8 @@ def incoming_sms():
             # directions=gmaps.fetch_directions(start_loc,end_loc,"driving",datetime.now())
             # response_content=gmaps.concat_with_new_line(directions)
             # resp.message(str(response_content))
-        # elif arguments[0] == 'Twitter':
-            resp.message("Hi -1!")
+        if arguments[0] == 'Weather':
+            resp.message("Weather!")
 
     return str(resp)
 
