@@ -61,7 +61,7 @@ def incoming_sms():
     # Start our TwiML response
     resp = twiml.Response()
 
-     if body is not None:
+    if body is not None:
         arguments = body.split(" ")
         if arguments[0] == 'Location':
             s = body
